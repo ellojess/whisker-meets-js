@@ -2,6 +2,9 @@
 const express = require('express')
 const app = express()
 
+// INITIALIZE BODY-PARSER AND ADD IT TO APP
+const bodyParser = require('body-parser');
+
 // require handlebars
 const exphbs = require('express-handlebars');
 
@@ -9,6 +12,8 @@ const exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 // Use handlebars to render
 app.set('view engine', 'handlebars');
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
  // MOCK ARRAY 
 var dogs = [
@@ -21,6 +26,16 @@ var dogs = [
 app.get('/', (req, res) => {
   res.render('dogs-index', { dogs: dogs });
 }) 
+
+// NEW
+app.get('/dogs/new', (req, res) => {
+  res.render('dogs-new', {});
+})
+
+// CREATE
+app.post('/events', (req, res) => {
+  console.log(req.body);
+})
 
 // Choose a port to listen on
 const port = process.env.PORT || 3000;
