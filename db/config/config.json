@@ -1,0 +1,19 @@
+{
+  "development": {
+    "username": null,
+    "password": null,
+    "database": "my-db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": null,
+    "password": null,
+    "database": "my-db-test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "PROD_DATABASE_URL"
+  }
+ }
