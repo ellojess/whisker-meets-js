@@ -1,26 +1,8 @@
 <!-- views/dogs-new.handlebars -->
 
-<form method="POST" action="/dogs">
-  <fieldset>
-    <legend>New Doggo</legend>
-    <!-- TITLE -->
-    <p>
-      <label for="title">Name</label><br>
-      <input type="text" name="title" />
-    </p>
-    <p>
-      <label for="desc">About</label><br>
-      <input type="text" name="desc" />
-    </p>
-    <p>
-      <label for="imgUrl">Image Url</label><br>
-      <input type="text" placeholder="" name="imgUrl" />
-    </p>
-  </fieldset>
-
-  <!-- BUTTON -->
-  <p>
-    <button type="submit">Showoff Doggo!</button>
-  </p>
-
+<form action="/dogs" method="post">
+  {{> dogs-form }}
+  <div class="text-right">
+    <button type="submit" class="btn btn-primary" name="button">Save</button>
+  </div>
 </form>

@@ -1,5 +1,6 @@
 // Initialize express
 const express = require('express')
+const methodOverride = require('method-override')
 const app = express()
 // INITIALIZE BODY-PARSER AND ADD IT TO APP
 const bodyParser = require('body-parser');
@@ -12,7 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 // Use handlebars to render
 app.set('view engine', 'handlebars');
-
+// override with POST having ?_method=DELETE or ?_method=PUT
+app.use(methodOverride('_method'))
 
  // MOCK ARRAY 
 var dogs = [
@@ -54,6 +56,29 @@ app.get('/dogs/:id', (req, res) => {
     console.log(err.message);
   })
 })
+
+// EDIT
+app.get('/dogs/:id/edit', (req, res) => {
+  models.Dog.findByPk(req.params.id).then((dog) => {
+    res.render('dogs-edit', { dog: dog });
+  }).catch((err) => {
+    console.log(err.message);
+  })
+});
+
+
+// UPDATE
+app.put('/dogs/:id', (req, res) => {
+  models.Dog.findByPk(req.params.id).then(dog => {
+    dog.update(req.body).then(dog => {
+      res.redirect(`/dogs/${req.params.id}`);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }).catch((err) => {
+    console.log(err);
+  });
+});
 
 // Choose a port to listen on
 const port = process.env.PORT || 3000;
