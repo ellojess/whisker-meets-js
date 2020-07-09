@@ -23,8 +23,9 @@ var dogs = [
   { title: "I am your third pup", desc: "bark", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" }
 ]
 
-// import dogs.js 
-require('./controllers/events')(app, models);
+// controllers
+require('./controllers/dogs')(app, models);
+require('./controllers/favorites')(app, models);
 
 
 // Choose a port to listen on

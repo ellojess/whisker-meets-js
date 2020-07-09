@@ -10,7 +10,7 @@ module.exports = function (app, models) {
     }) 
 
     // NEW
-app.get('/dogs/new', (req, res) => {
+    app.get('/dogs/new', (req, res) => {
     res.render('dogs-new', {});
   })
   
@@ -24,17 +24,15 @@ app.get('/dogs/new', (req, res) => {
     });
   })
   
-  // SHOW
-  app.get('/dogs/:id', (req, res) => {
-    // Search for the dog by its id that was passed in via req.params
-    models.Dog.findByPk(req.params.id).then((dog) => {
-      // If the id is for a valid dog, show it
-      res.render('dogs-show', { dog: dog })
+// SHOW
+app.get('/dogs/:id', (req, res) => {
+    models.Dog.findByPk(req.params.id, { include: [{ model: models.Rsvp }] }).then(dog => {
+        res.render('dogs-show', { dog: dog });
     }).catch((err) => {
-      // if they id was for a dog not in our db, log an error
-      console.log(err.message);
+        console.log(err.message);
     })
-  })
+});
+
   
   // EDIT
   app.get('/dogs/:id/edit', (req, res) => {

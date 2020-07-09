@@ -4,6 +4,22 @@
     <h3>{{dog.title}}</h3>
     <div class="lead">{{dog.desc}}</div>
     <div class="text-right">
-      <a href="/events/{{dog.id}}/edit">Edit</a>
+      <a href="/dogs/{{dog.id}}/edit">Edit</a>
+    </div>
+</div>
+
+{{!-- FAVORITE BUTTON --}}
+<div class="col-lg-4 offset-lg-1">
+    <div class="d-flex justify-content-between">
+        <b>Favorites ({{dog.Favorites.length}})</b>
+        <a href="/dogs/{{dog.id}}/favorites/new" class="btn btn-primary btn-sm">Favorites</a>
+    </div>
+
+    <div class="list-group mt-4">
+        {{#each dog.Favorites}}
+        <div class="list-group-item">
+            {{this.name}}
+        </div>
+        {{/each}}
     </div>
 </div>

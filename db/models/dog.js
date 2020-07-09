@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     imgUrl: DataTypes.STRING
   }, {});
   Dog.associate = function(models) {
-    // associations can be defined here
+    Dog.hasMany(models.Favorite);
   };
   return Dog;
 }; 
