@@ -80,6 +80,16 @@ app.put('/dogs/:id', (req, res) => {
   });
 });
 
+// DELETE
+app.delete('/dogs/:id', (req, res) => {
+  models.Dog.findByPk(req.params.id).then(dog => {
+    dog.destroy();
+    res.redirect(`/`);
+  }).catch((err) => {
+    console.log(err);
+  });
+})
+
 // Choose a port to listen on
 const port = process.env.PORT || 3000;
 
