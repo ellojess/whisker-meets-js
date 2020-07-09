@@ -26,11 +26,14 @@ module.exports = function (app, models) {
   
 // SHOW
 app.get('/dogs/:id', (req, res) => {
-    models.Dog.findByPk(req.params.id, { include: [{ model: models.Rsvp }] }).then(dog => {
-        res.render('dogs-show', { dog: dog });
-    }).catch((err) => {
-        console.log(err.message);
-    })
+  models.Dog.findByPk(req.params.id, { include: [{ model: models.Favorite }] }).then(dog => {
+      let createdAt = dog.createdAt;
+      createdAt = moment(createdAt).format('MMMM Do YYYY, h:mm:ss a');
+      dog.createdAtFormatted = createdAt;
+      res.render('dogs-show', { dog: dog });
+  }).catch((err) => {
+      console.log(err.message);
+  })
 });
 
   
