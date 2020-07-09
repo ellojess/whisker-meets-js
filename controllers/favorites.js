@@ -18,5 +18,13 @@ module.exports = (app, models) => {
         });
       });
   
-    // DESTROY  
+    // DELETE
+    app.delete('/dogs/:dogId/favorites/:id', (req, res) => {
+      models.Favorite.findByPk(req.params.id).then(favorite => {
+          favorite.destroy();
+          res.redirect(`/dogs/${req.params.dogId}`);
+      }).catch((err) => {
+          console.log(err);
+      });
+  });
   }
