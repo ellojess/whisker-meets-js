@@ -16,6 +16,7 @@
     "moment": "^2.27.0",
     "pg": "^8.2.2",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.3.0"
+    "sequelize": "^6.3.0",
+    "sequelize-cli": "^6.2.0"
   }
 }

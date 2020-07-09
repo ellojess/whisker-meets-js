@@ -7,20 +7,16 @@
                     <h3>Update Doggo Info</h3>
                 </div>
                 <div class="card-text">
-                    <form action="/dogs/{{dog.id}}?_method=PUT" method="post">
+                    <form action="/dogs/{{dog.dataValues.id}}?_method=PUT" method="post">
                         {{> dogs-form }}
                         <div class="text-right">
-                            <a href="/dogs/{{dog.id}}" class='text-muted mr-2'>Cancel</a>
+                            <a href="/dogs/{{dog.dataValues.id}}" class='text-muted mr-2'>Cancel</a>
                             <button type="submit" class="btn btn-primary" name="button">Update</button>
                         </div>
                     </form>
-
-                    <form action="/dogs/{{dog.id}}?_method=PUT" method="post"></form>
+                    <form action="/dogs/{{dog.dataValues.id}}?_method=DELETE" method="POST">
+                        <button type="submit" class='btn btn-danger'>Delete</button>
                     </form>
-                    <form action="/dogs/{{dog.id}}?_method=DELETE" method="POST">
-                    <button type="submit" class='btn btn-danger'>Delete</button>
-                    </form>
-                    
                 </div>
             </div>
         </div>

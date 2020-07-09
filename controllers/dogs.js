@@ -1,6 +1,7 @@
 //dogs.js
 
 module.exports = function (app, models) {
+  var moment = require('moment');
 
     // INDEX
     app.get('/', (req, res) => {
