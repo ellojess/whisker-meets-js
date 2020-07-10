@@ -30,5 +30,11 @@
           </div>
         </div>
       {{/each}}
+          <form action="/dogs/{{dog._id}}/comments" method="post">
+            <textarea class='form-control' name="content" placeholder="Add a comment"></textarea>
+            <div class="text-right">
+              <button type="submit" class="btn btn-sm">Send Comment</button>
+            </div>
+          </form>
     </div>
 </div>
