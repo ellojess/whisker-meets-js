@@ -25,3 +25,20 @@ const passport = require('passport');
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+/* MONGOOSE SETUP */
+
+const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
+
+mongoose.connect('mongodb://localhost/MyDatabase',
+  { useNewUrlParser: true, useUnifiedTopology: true });
+
+const Schema = mongoose.Schema;
+const UserDetail = new Schema({
+  username: String,
+  password: String
+});
+
+UserDetail.plugin(passportLocalMongoose);
+const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
