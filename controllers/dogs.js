@@ -1,6 +1,9 @@
 //dogs.js
+const Dog = require("../models/dogs")
 
-module.exports = function (app, models) {
+module.exports = function (app) {
+
+
   var moment = require('moment');
 
     // INDEX

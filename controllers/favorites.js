@@ -1,6 +1,6 @@
 // controllers/favorites.js
 
-module.exports = (app, models) => {
+module.exports = (app) => {
     // NEW
     app.get('/dogs/:dogId/favorites/new', (req, res) => {
       models.Dog.findByPk(req.params.dogId).then(dog => {

@@ -36,5 +36,8 @@
               <button type="submit" class="btn btn-sm">Send Comment</button>
             </div>
           </form>
+          {{#each post.comments}}
+            {{this}}
+          {{/each}}
     </div>
 </div>
