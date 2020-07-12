@@ -35,39 +35,39 @@ module.exports = function (app) {
   //     console.log(err)
   //   });
 
-    // CREATE
-    app.post("/dogs/new", (req, res) => {
-      if (req.user) {
+  // CREATE
+  app.post("/dogs/new", (req, res) => {
+    if (req.user) {
         var dog = new Dog(req.body);
+        dog.author = req.user._id;
 
-        dog.save(function(err, dog) {
-          return res.redirect(`/`);
-        });
-      } else {
+        dog
+            .save()
+            .then(dog => {
+                return User.findById(req.user._id);
+            })
+            .then(user => {
+                user.dogs.unshift(post);
+                user.save();
+                // REDIRECT TO THE NEW POST
+                res.redirect(`/dogs/${dog._id}`);
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    } else {
         return res.status(401); // UNAUTHORIZED
-      }
-    });
-
-  //  Dog.create(req.body).then(dog => {
-      // Redirect to dogs/:id
-    //   res.redirect(`/dogs/${dog.id}`)
-    // }).catch((err) => {
-    //   console.log(err)
-    // });
-  // })
+    }
+  });
   
 // SHOW
 app.get('/dogs/:id', (req, res) => {
-  // Dog.findByPk(req.params.id, { include: [{ model: models.Favorite }] }).then(dog => {
-
+  var currentUser = req.user;
     Dog.findById(req.params.id)
       .populate('comments')
+      .populate('author')
       .then((dog) => {
-      // let createdAt = dog.createdAt;
-      //let createdAt = moment().format('MMMM Do YYYY, h:mm:ss a');
-      //console.log(`Created at: ${createdAt}`)
-      // dog.createdAtFormatted = createdAt;
-        res.render('dogs-show', { dog });
+        res.render('dogs-show', { dog, currentUser });
       })
       .catch((err) => {
           console.log(err.message);
