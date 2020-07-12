@@ -8,13 +8,13 @@
         <h1>Floofs</h1>
         {{#each dogs}}
             <div class="card mt-3">
-            <img class="card-img-top" src="{{this.dataValues.imgUrl}}" alt="Card image cap">
+            <img class="card-img-top" src="{{this.imgUrl}}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{this.dataValues.title}}</h5>
-                <p class="card-text">{{this.dataValues.desc}}</p>
+                <h5 class="card-title">{{this.name}}</h5>
+                <p class="card-text">{{this.desc}}</p>
                 <div class="text-right">
-                <a href="/dogs/{{this.dataValues.id}}/favorites/new" class="btn btn-info">Favorite</a>
-                <a href="/dogs/{{this.dataValues.id}}" class="btn btn-primary">View</a>
+                <a href="/dogs/{{this._id}}/favorites/new" class="btn btn-info">Favorite</a>
+                <a href="/dogs/{{this._id}}" class="btn btn-primary">View</a>
                 </div>
             </div>
             </div>

@@ -3,10 +3,10 @@
     <img class="img-fluid w-100 rounded mb-3" src="{{dog.dataValues.imgUrl}}" alt="Card image cap">
     <small class="text-muted">Joined: {{dog.createdAtFormatted}}</small>
 
-    <h3>{{dog.title}}</h3>
-    <div class="lead">{{dog.dataValues.desc}}</div>
+    <h3>{{dog.name}}</h3>
+    <div class="lead">{{dog.desc}}</div>
     <div class="text-right">
-      <a href="/dogs/{{dog.dataValues.id}}/edit">Edit</a>
+      <a href="/dogs/{{dog.id}}/edit">Edit</a>
     </div>
 </div>
 
