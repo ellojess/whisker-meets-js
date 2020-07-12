@@ -6,7 +6,7 @@ const DogSchema = new Schema({
     desc: {type: String, default: ""}, 
     imgUrl: {type: String}, 
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-    createAt: {type: String}
+    createdAt: { type: Date }
 });
 
 module.exports = mongoose.model("Dog", DogSchema);

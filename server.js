@@ -6,6 +6,8 @@ const app = express()
 const bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 const expressValidator = require('express-validator');
+var cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
@@ -29,6 +31,7 @@ app.use(express.static(__dirname));
 app.use(bodyParser.json());
 const checkUser = require("./utils/checkUser")
 app.use(checkUser)
+app.use(cookieParser());
 
 // controllers
 require('./db/whiskersdb')

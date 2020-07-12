@@ -8,9 +8,13 @@ module.exports = function (app) {
     // INDEX
     app.get('/', (req, res) => {
         // //Dog.find({ order: [['createdAt', 'DESC']] }).then(dogs => {
-          Dog.find({}).lean().then(dogs => {
-        res.render('dogs-index', { dogs: dogs });
+          Dog.find({}).lean()
+          .then(dogs => {
+            res.render('dogs-index', { dogs});
         })
+        .catch(err => {
+          console.log(err.message);
+        });
     }) 
 
     // NEW
@@ -44,18 +48,18 @@ module.exports = function (app) {
 app.get('/dogs/:id', (req, res) => {
   // Dog.findByPk(req.params.id, { include: [{ model: models.Favorite }] }).then(dog => {
 
-  console.log("Im in dogs/:id")
-
-
-    Dog.findById(req.params.id).then(dog => {
+    Dog.findById(req.params.id)
+      .populate('comments')
+      .then((dog) => {
       // let createdAt = dog.createdAt;
       //let createdAt = moment().format('MMMM Do YYYY, h:mm:ss a');
       //console.log(`Created at: ${createdAt}`)
       // dog.createdAtFormatted = createdAt;
-      res.render('dogs-show', { dog: dog });
-  }).catch((err) => {
-      console.log(err.message);
-  })
+        res.render('dogs-show', { dog });
+      })
+      .catch((err) => {
+          console.log(err.message);
+      })
 });
 
   

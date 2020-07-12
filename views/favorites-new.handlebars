@@ -7,11 +7,11 @@
                 <div class="card-title">
                     <h3>New Favorite</h3>
                     <div class="lead">
-                        Dog: {{dog.dataValues.title}}
+                        Dog: {{dog.name}}
                     </div>
                 </div>
                 <div class="card-text">
-                    <form action="/dogs/{{dog.dataValues.id}}/favorites" method="post">
+                    <form action="/dogs/{{dog.id}}/favorites" method="post">
                         <div class="form-group">
                             <label for="title">Name</label>
                             <input name="name" class="form-control" placeholder="Jane Doe" />
