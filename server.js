@@ -5,8 +5,10 @@ const app = express()
 // INITIALIZE BODY-PARSER AND ADD IT TO APP
 const bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
+const expressValidator = require('express-validator');
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 // Use "main" as our default layout
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 // Use handlebars to render
@@ -31,9 +33,9 @@ app.use(checkUser)
 // controllers
 require('./db/whiskersdb')
 
-// require('./controllers/dogs')(app);
-// require('./controllers/favorites')(app);
-// require('./controllers/comments')(app);
+require('./controllers/dogs')(app);
+require('./controllers/favorites')(app);
+require('./controllers/comments')(app);
 require('./controllers/auth')(app);
 
 

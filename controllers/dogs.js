@@ -1,14 +1,14 @@
 //dogs.js
 const Dog = require("../models/dogs")
+const moment = require('moment');
+
 
 module.exports = function (app) {
 
-
-  var moment = require('moment');
-
     // INDEX
     app.get('/', (req, res) => {
-        models.Dog.findAll({ order: [['createdAt', 'DESC']] }).then(dogs => {
+        // //Dog.find({ order: [['createdAt', 'DESC']] }).then(dogs => {
+          Dog.find({}).lean().then(dogs => {
         res.render('dogs-index', { dogs: dogs });
         })
     }) 
@@ -19,21 +19,39 @@ module.exports = function (app) {
   })
   
   // CREATE
-  app.post('/dogs', (req, res) => {
-    models.Dog.create(req.body).then(dog => {
+  app.post('/dogs/new', (req, res) => {
+
+    console.log("Im in dogs/new")
+
+    const dog = new Dog(req.body)
+    dog.createdAt = moment().format('MMMM Do YYYY, h:mm:ss a');
+    dog.save().then(dog => {
       // Redirect to dogs/:id
       res.redirect(`/dogs/${dog.id}`)
     }).catch((err) => {
       console.log(err)
     });
+//
+  //  Dog.create(req.body).then(dog => {
+      // Redirect to dogs/:id
+    //   res.redirect(`/dogs/${dog.id}`)
+    // }).catch((err) => {
+    //   console.log(err)
+    // });
   })
   
 // SHOW
 app.get('/dogs/:id', (req, res) => {
-  models.Dog.findByPk(req.params.id, { include: [{ model: models.Favorite }] }).then(dog => {
-      let createdAt = dog.createdAt;
-      createdAt = moment(createdAt).format('MMMM Do YYYY, h:mm:ss a');
-      dog.createdAtFormatted = createdAt;
+  // Dog.findByPk(req.params.id, { include: [{ model: models.Favorite }] }).then(dog => {
+
+  console.log("Im in dogs/:id")
+
+
+    Dog.findById(req.params.id).then(dog => {
+      // let createdAt = dog.createdAt;
+      //let createdAt = moment().format('MMMM Do YYYY, h:mm:ss a');
+      //console.log(`Created at: ${createdAt}`)
+      // dog.createdAtFormatted = createdAt;
       res.render('dogs-show', { dog: dog });
   }).catch((err) => {
       console.log(err.message);
@@ -43,7 +61,7 @@ app.get('/dogs/:id', (req, res) => {
   
   // EDIT
   app.get('/dogs/:id/edit', (req, res) => {
-    models.Dog.findByPk(req.params.id).then((dog) => {
+    Dog.findByPk(req.params.id).then((dog) => {
       res.render('dogs-edit', { dog: dog });
     }).catch((err) => {
       console.log(err.message);
@@ -53,7 +71,7 @@ app.get('/dogs/:id', (req, res) => {
   
   // UPDATE
   app.put('/dogs/:id', (req, res) => {
-    models.Dog.findByPk(req.params.id).then(dog => {
+    Dog.findByPk(req.params.id).then(dog => {
       dog.update(req.body).then(dog => {
         res.redirect(`/dogs/${req.params.id}`);
       }).catch((err) => {
@@ -66,7 +84,7 @@ app.get('/dogs/:id', (req, res) => {
   
   // DELETE
   app.delete('/dogs/:id', (req, res) => {
-    models.Dog.findByPk(req.params.id).then(dog => {
+    Dog.findByPk(req.params.id).then(dog => {
       dog.destroy();
       res.redirect(`/`);
     }).catch((err) => {
