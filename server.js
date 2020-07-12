@@ -47,6 +47,7 @@ require('./controllers/dogs')(app);
 require('./controllers/favorites')(app);
 require('./controllers/comments')(app);
 require('./controllers/auth')(app);
+require('./controllers/replies')(app);
 
 
 // Choose a port to listen on

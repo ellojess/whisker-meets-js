@@ -40,8 +40,8 @@
               <button type="submit" class="btn btn-sm">Send Comment</button>
             </div>
           </form>
-          {{#each dog.comments}}
-            <p>{{this.content}}</p>
+          {{#each post.comments}}
+            {{> comment comment=this postId=../post._id}}
           {{/each}}
     </div>
 </div>
