@@ -7,10 +7,15 @@ module.exports = function (app) {
 
     // INDEX
     app.get('/', (req, res) => {
+      var currentUser = req.user;
         // //Dog.find({ order: [['createdAt', 'DESC']] }).then(dogs => {
-          Dog.find({}).lean().then(dogs => {
-        res.render('dogs-index', { dogs: dogs });
-        })
+      Dog.find({}).lean()
+      .then(dogs => {
+        res.render('dogs-index', { dogs, currentUser});
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
     }) 
 
     // NEW
@@ -19,43 +24,54 @@ module.exports = function (app) {
   })
   
   // CREATE
-  app.post('/dogs/new', (req, res) => {
+  // app.post('/dogs/new', (req, res) => {
 
-    console.log("Im in dogs/new")
+  //   const dog = new Dog(req.body)
+  //   dog.createdAt = moment().format('MMMM Do YYYY, h:mm:ss a');
+  //   dog.save().then(dog => {
+  //     // Redirect to dogs/:id
+  //     res.redirect(`/dogs/${dog.id}`)
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   });
 
-    const dog = new Dog(req.body)
-    dog.createdAt = moment().format('MMMM Do YYYY, h:mm:ss a');
-    dog.save().then(dog => {
-      // Redirect to dogs/:id
-      res.redirect(`/dogs/${dog.id}`)
-    }).catch((err) => {
-      console.log(err)
-    });
-//
-  //  Dog.create(req.body).then(dog => {
-      // Redirect to dogs/:id
-    //   res.redirect(`/dogs/${dog.id}`)
-    // }).catch((err) => {
-    //   console.log(err)
-    // });
-  })
+  // CREATE
+  app.post("/dogs/new", (req, res) => {
+    if (req.user) {
+        var dog = new Dog(req.body);
+        dog.author = req.user._id;
+
+        dog
+            .save()
+            .then(dog => {
+                return User.findById(req.user._id);
+            })
+            .then(user => {
+                user.dogs.unshift(post);
+                user.save();
+                // REDIRECT TO THE NEW POST
+                res.redirect(`/dogs/${dog._id}`);
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    } else {
+        return res.status(401); // UNAUTHORIZED
+    }
+  });
   
 // SHOW
 app.get('/dogs/:id', (req, res) => {
-  // Dog.findByPk(req.params.id, { include: [{ model: models.Favorite }] }).then(dog => {
-
-  console.log("Im in dogs/:id")
-
-
-    Dog.findById(req.params.id).then(dog => {
-      // let createdAt = dog.createdAt;
-      //let createdAt = moment().format('MMMM Do YYYY, h:mm:ss a');
-      //console.log(`Created at: ${createdAt}`)
-      // dog.createdAtFormatted = createdAt;
-      res.render('dogs-show', { dog: dog });
-  }).catch((err) => {
-      console.log(err.message);
-  })
+  var currentUser = req.user;
+    Dog.findById(req.params.id)
+      .populate('comments').lean()
+      .populate('author')
+      .then((dog) => {
+        res.render('dogs-show', { dog, currentUser });
+      })
+      .catch((err) => {
+          console.log(err.message);
+      })
 });
 
   

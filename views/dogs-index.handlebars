@@ -2,7 +2,7 @@
 
 <div class="row mt-4">
     <div class="col-sm-4 offset-lg-3">
-        <h1>Reviews</h1>
+        {{!-- <h1>Reviews</h1> --}}
         <a href="/dogs/new">New Doggo</a>
 
         <h1>Floofs</h1>
@@ -12,6 +12,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{this.name}}</h5>
                 <p class="card-text">{{this.desc}}</p>
+                <div><small>{{this.author}}</small></div>
                 <div class="text-right">
                 <a href="/dogs/{{this._id}}/favorites/new" class="btn btn-info">Favorite</a>
                 <a href="/dogs/{{this._id}}" class="btn btn-primary">View</a>
