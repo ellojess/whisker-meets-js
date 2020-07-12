@@ -9,6 +9,19 @@ const expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
+// var checkAuth = (req, res, next) => {
+//   console.log("Checking authentication");
+//   if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
+//     req.user = null;
+//   } else {
+//     var token = req.cookies.nToken;
+//     var decodedToken = jwt.decode(token, { complete: true }) || {};
+//     req.user = decodedToken.payload;
+//   }
+//   next();
+// };
+// app.use(checkAuth);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 // Use "main" as our default layout
@@ -18,12 +31,6 @@ app.set('view engine', 'handlebars');
 // override with POST having ?_method=DELETE or ?_method=PUT
 app.use(methodOverride('_method'))
 
- // MOCK ARRAY 
-var dogs = [
-  { title: "I am your first doggo", desc: "woof woof", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" },
-  { title: "I am your second dog", desc: "awooo", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" },
-  { title: "I am your third pup", desc: "bark", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" }
-]
 
 // Auth Setup
 app.use(express.static(__dirname));
