@@ -64,7 +64,7 @@ module.exports = function (app) {
 app.get('/dogs/:id', (req, res) => {
   var currentUser = req.user;
     Dog.findById(req.params.id)
-      .populate('comments')
+      .populate('comments').lean()
       .populate('author')
       .then((dog) => {
         res.render('dogs-show', { dog, currentUser });
