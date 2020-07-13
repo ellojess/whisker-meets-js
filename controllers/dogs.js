@@ -1,5 +1,6 @@
 //dogs.js
 const Dog = require("../models/dogs")
+const User = require("../models/users")
 const moment = require('moment');
 
 
@@ -20,35 +21,26 @@ module.exports = function (app) {
 
     // NEW
     app.get('/dogs/new', (req, res) => {
-    res.render('dogs-new', {});
-  })
-  
-  // CREATE
-  // app.post('/dogs/new', (req, res) => {
-
-  //   const dog = new Dog(req.body)
-  //   dog.createdAt = moment().format('MMMM Do YYYY, h:mm:ss a');
-  //   dog.save().then(dog => {
-  //     // Redirect to dogs/:id
-  //     res.redirect(`/dogs/${dog.id}`)
-  //   }).catch((err) => {
-  //     console.log(err)
-  //   });
+      let currentUser = req.user;
+      res.render('dogs-new', {currentUser});
+    })
 
   // CREATE
   app.post("/dogs/new", (req, res) => {
     if (req.user) {
+        console.log("user is there")
         var dog = new Dog(req.body);
         dog.author = req.user._id;
 
         dog
             .save()
             .then(dog => {
-                return User.findById(req.user._id);
+                return Promise.all([User.findById(req.user._id)]);
             })
             .then(user => {
-                user.dogs.unshift(post);
-                user.save();
+                // console.log(`Username: ${user}`)
+                // user.dogs.unshift(dog);
+                // user.save();
                 // REDIRECT TO THE NEW POST
                 res.redirect(`/dogs/${dog._id}`);
             })
@@ -56,6 +48,7 @@ module.exports = function (app) {
                 console.log(err.message);
             });
     } else {
+      console.log("user is not")
         return res.status(401); // UNAUTHORIZED
     }
   });
@@ -77,8 +70,9 @@ app.get('/dogs/:id', (req, res) => {
   
   // EDIT
   app.get('/dogs/:id/edit', (req, res) => {
-    Dog.findById(req.params.id).then((dog) => {
-      res.render('dogs-edit', { dog: dog });
+    Dog.findById(req.params.id).lean().then((dog) => {
+      console.log(`Dog id: ${dog._id}`)
+      res.render('dogs-edit', { dog, currentUser});
     }).catch((err) => {
       console.log(err.message);
     })
@@ -100,8 +94,7 @@ app.get('/dogs/:id', (req, res) => {
   
   // DELETE
   app.delete('/dogs/:id', (req, res) => {
-    Dog.findById(req.params.id).then(dog => {
-      dog.destroy();
+    Dog.deleteOne({_id: req.params.id}).then(dog => {
       res.redirect(`/`);
     }).catch((err) => {
       console.log(err);

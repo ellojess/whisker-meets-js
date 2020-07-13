@@ -2,6 +2,8 @@
 const express = require('express')
 const methodOverride = require('method-override')
 const app = express()
+
+const dotenv = require("dotenv").config();
 // INITIALIZE BODY-PARSER AND ADD IT TO APP
 const bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
@@ -9,18 +11,6 @@ const expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
-// var checkAuth = (req, res, next) => {
-//   console.log("Checking authentication");
-//   if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
-//     req.user = null;
-//   } else {
-//     var token = req.cookies.nToken;
-//     var decodedToken = jwt.decode(token, { complete: true }) || {};
-//     req.user = decodedToken.payload;
-//   }
-//   next();
-// };
-// app.use(checkAuth);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
@@ -34,11 +24,23 @@ app.use(methodOverride('_method'))
 
 // Auth Setup
 app.use(express.static(__dirname));
-
 app.use(bodyParser.json());
 const checkUser = require("./utils/checkUser")
 app.use(checkUser)
 app.use(cookieParser());
+
+var checkAuth = (req, res, next) => {
+  console.log("Checking authentication");
+  if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
+    req.user = null;
+  } else {
+    var token = req.cookies.nToken;
+    var decodedToken = jwt.decode(token, { complete: true }) || {};
+    req.user = decodedToken.payload;
+  }
+  next();
+};
+app.use(checkAuth);
 
 // controllers
 require('./db/whiskersdb')

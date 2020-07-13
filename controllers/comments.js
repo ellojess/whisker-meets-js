@@ -12,8 +12,10 @@ module.exports = function (app) {
               return Promise.all([
                   Dog.findById(req.params.dogId)
               ]);
+              
           })
-          .then(([dog, user]) => {
+          .then((dog) => {
+            console.log(`Dog name: ${dog.name}`)
             dog.comments.unshift(comment);
               return Promise.all([
                 dog.save()
