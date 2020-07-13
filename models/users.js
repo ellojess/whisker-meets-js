@@ -6,8 +6,9 @@ const UserSchema = new Schema({
   createdAt: { type: Date },
   updatedAt: { type: Date },
   password: { type: String, select: false },
-  username: { type: String, required: true }
-});
+  username: { type: String, required: true },
+  dogs: [{type: Schema.Types.ObjectId, ref: "Dog"}]
+}, {minimize:false});
 
 // Must use function here! ES6 => functions do not bind this!
 UserSchema.pre("save", function(next) {

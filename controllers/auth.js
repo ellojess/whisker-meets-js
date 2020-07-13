@@ -32,22 +32,31 @@ module.exports = (app) => {
     });
 
         // LOGIN
+    app.get("/login", (req, res) => {
+        res.render("login")
+    });
+
+
     app.post("/login", (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
         // Find this user name
         User.findOne({ username }, "username password")
         .then(user => {
+            console.log("Im in user.findone")
             if (!user) {
-            // User not found
-            return res.status(401).send({ message: "Wrong Username or Password" });
+                // User not found
+                console.log("User is not found")
+                return res.status(401).send({ message: "Wrong Username or Password" });
             }
             // Check the password
             user.comparePassword(password, (err, isMatch) => {
             if (!isMatch) {
+                console.log("password does not match")
                 // Password does not match
                 return res.status(401).send({ message: "Wrong Username or password" });
             }
+            console.log(`Creating json web token with secret: ${process.env}`)
             // Create a token
             const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
                 expiresIn: "60 days"

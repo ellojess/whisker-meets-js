@@ -5,12 +5,14 @@ var User = require("../models/users");
 module.exports = app => {
   // NEW REPLY
   app.get("/dogs/:dogId/comments/:commentId/replies/new", (req, res) => {
-    let dog;
+    let dog
     Dog.findById(req.params.dogId)
-      .then(dog => {
+      .then(doggo => {
+        dog = doggo
         return Comment.findById(req.params.commentId);
       })
       .then(comment => {
+        console.log(comment)
         res.render("replies-new", { dog, comment });
       })
       .catch(err => {
@@ -19,7 +21,7 @@ module.exports = app => {
   });
 
     // CREATE REPLY
-    app.post("/dogs/:dogId/comments/:commentId/replies", (req, res) => {
+    app.post("/dogs/:dogId/comments/:commentId/replies/new", (req, res) => {
         // TURN REPLY INTO A COMMENT OBJECT
         const reply = new Comment(req.body);
         reply.author = req.user._id

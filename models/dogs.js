@@ -9,12 +9,16 @@ const DogSchema = new Schema({
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
     createdAt: { type: Date },
     author : { type: Schema.Types.ObjectId, ref: "User", required: true }, 
-    favorite:[{ type: Schema.Types.ObjectId, ref: "User"}]
-});
+    favorites:[{ type: Schema.Types.ObjectId, ref: "User"}]
+}, {minimize:false});
 
 // Always populate the author field
+//DogSchema
+ //   .pre('findOne', Populate('author'))
+  //  .pre('find', Populate('author'))
+
 DogSchema
-    .pre('findOne', Populate('author'))
-    .pre('find', Populate('author'))
+    .pre('findOne', Populate('author')).pre('find', Populate('author'))
+    .pre('findOne', Populate('comments')).pre('find', Populate('comments'));
 
 module.exports = mongoose.model("Dog", DogSchema);

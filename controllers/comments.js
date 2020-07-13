@@ -2,9 +2,13 @@ const Dog = require('../models/dogs');
 const Comment = require('../models/comment');
 
 module.exports = function (app) {
+
   // CREATE Comment
   app.post("/dogs/:dogId/comments", function (req, res) {
+
+    if (req.user) {
       const comment = new Comment(req.body);
+      console.log(req.params.dogId)
       comment.author = req.user._id;
       comment
           .save()
@@ -12,9 +16,11 @@ module.exports = function (app) {
               return Promise.all([
                   Dog.findById(req.params.dogId)
               ]);
+              
           })
-          .then(([dog, user]) => {
-            dog.comments.unshift(comment);
+          .then(([dog]) => {
+            console.log(`Dog name: ${dog.name}`)
+            dog.comments.unshift(comment._id);
               return Promise.all([
                 dog.save()
               ]);
@@ -25,5 +31,8 @@ module.exports = function (app) {
           .catch(err => {
               console.log(err);
           });
+      } else {
+        res.redirect('/login')
+      }
   });
 };
