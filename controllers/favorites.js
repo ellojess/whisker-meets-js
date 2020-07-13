@@ -3,7 +3,7 @@
 module.exports = (app) => {
     // NEW
     app.get('/dogs/:dogId/favorites/new', (req, res) => {
-      models.Dog.findByPk(req.params.dogId).then(dog => {
+      models.Dog.findById(req.params.dogId).then(dog => {
         res.render('favorites-new', { dog: dog });
       });
     });
@@ -20,7 +20,7 @@ module.exports = (app) => {
   
     // DELETE
     app.delete('/dogs/:dogId/favorites/:id', (req, res) => {
-      models.Favorite.findByPk(req.params.id).then(favorite => {
+      models.Favorite.findById(req.params.id).then(favorite => {
           favorite.destroy();
           res.redirect(`/dogs/${req.params.dogId}`);
       }).catch((err) => {

@@ -77,7 +77,7 @@ app.get('/dogs/:id', (req, res) => {
   
   // EDIT
   app.get('/dogs/:id/edit', (req, res) => {
-    Dog.findByPk(req.params.id).then((dog) => {
+    Dog.findById(req.params.id).then((dog) => {
       res.render('dogs-edit', { dog: dog });
     }).catch((err) => {
       console.log(err.message);
@@ -87,7 +87,7 @@ app.get('/dogs/:id', (req, res) => {
   
   // UPDATE
   app.put('/dogs/:id', (req, res) => {
-    Dog.findByPk(req.params.id).then(dog => {
+    Dog.findById(req.params.id).then(dog => {
       dog.update(req.body).then(dog => {
         res.redirect(`/dogs/${req.params.id}`);
       }).catch((err) => {
@@ -100,7 +100,7 @@ app.get('/dogs/:id', (req, res) => {
   
   // DELETE
   app.delete('/dogs/:id', (req, res) => {
-    Dog.findByPk(req.params.id).then(dog => {
+    Dog.findById(req.params.id).then(dog => {
       dog.destroy();
       res.redirect(`/`);
     }).catch((err) => {
