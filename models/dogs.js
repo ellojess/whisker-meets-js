@@ -10,7 +10,7 @@ const DogSchema = new Schema({
     createdAt: { type: Date },
     author : { type: Schema.Types.ObjectId, ref: "User", required: true }, 
     favorites:[{ type: Schema.Types.ObjectId, ref: "User"}]
-});
+}, {minimize:false});
 
 // Always populate the author field
 //DogSchema

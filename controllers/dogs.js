@@ -4,7 +4,7 @@ const User = require("../models/users")
 const moment = require('moment');
 
 
-module.exports = function (app) {
+module.exports = app => {
 
     // INDEX
     app.get('/', (req, res) => {
@@ -35,12 +35,12 @@ module.exports = function (app) {
         dog
             .save()
             .then(dog => {
-                return Promise.all([User.findById(req.user._id)]);
+                return Promise.all(User.findById(req.user._id));
             })
             .then(user => {
-                // console.log(`Username: ${user}`)
-                // user.dogs.unshift(dog);
-                // user.save();
+                console.log(`Username: ${user}`)
+                user.dogs.unshift(dog);
+                user.save();
                 // REDIRECT TO THE NEW POST
                 res.redirect(`/dogs/${dog._id}`);
             })
@@ -48,7 +48,7 @@ module.exports = function (app) {
                 console.log(err.message);
             });
     } else {
-      console.log("user is not")
+        console.log("user is not")
         return res.status(401); // UNAUTHORIZED
     }
   });
@@ -70,6 +70,7 @@ app.get('/dogs/:id', (req, res) => {
   
   // EDIT
   app.get('/dogs/:id/edit', (req, res) => {
+    var currentUser = req.user;
     Dog.findById(req.params.id).lean().then((dog) => {
       console.log(`Dog id: ${dog._id}`)
       res.render('dogs-edit', { dog, currentUser});

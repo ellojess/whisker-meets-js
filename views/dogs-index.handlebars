@@ -8,16 +8,17 @@
         <h1>Floofs</h1>
         {{#each dogs}}
             <div class="card mt-3">
-            <img class="card-img-top" src="{{this.imgUrl}}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{this.name}}</h5>
-                <p class="card-text">{{this.desc}}</p>
-                <div><small>{{this.author}}</small></div>
-                <div class="text-right">
-                <a href="/dogs/{{this._id}}/favorites/new" class="btn btn-info">Favorite</a>
-                <a href="/dogs/{{this._id}}" class="btn btn-primary">View</a>
+                <img class="card-img-top" src="{{this.imgUrl}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text">{{this.desc}}</p>
+                    <div><small>{{this.author}}</small></div>
+                    <div class="text-right">
+                        
+                    <a href="/dogs/{{this._id}}/favorites/new" class="btn btn-info">Favorite</a>
+                    <a href="/dogs/{{this._id}}" class="btn btn-primary">View</a>
+                    </div>
                 </div>
-            </div>
             </div>
         {{/each}}
     </div>

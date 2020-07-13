@@ -6,18 +6,25 @@ const app = express()
 const dotenv = require("dotenv").config();
 // INITIALIZE BODY-PARSER AND ADD IT TO APP
 const bodyParser = require('body-parser');
-var exphbs = require('express-handlebars');
 const expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
+const handlebars = require('handlebars');
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
+const exphbs = require('express-handlebars');
+const hbs = exphbs.create({
+    defaultLayout: 'main',
+    handlebars: allowInsecurePrototypeAccess(handlebars),
+});
+
+app.engine('handlebars', hbs.engine);
+
+// Use handlebars to render
+app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
-// Use "main" as our default layout
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-// Use handlebars to render
-app.set('view engine', 'handlebars');
 // override with POST having ?_method=DELETE or ?_method=PUT
 app.use(methodOverride('_method'))
 
