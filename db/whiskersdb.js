@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 assert = require("assert");
 
-const url = "mongodb://localhost/whiskers-db";
+const url = process.env.MONGODB_URI || "mongodb://localhost/whiskers-db";
 mongoose.Promise = global.Promise;
 mongoose.connect(
   url,
