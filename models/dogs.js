@@ -9,7 +9,8 @@ const DogSchema = new Schema({
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
     createdAt: { type: Date },
     author : { type: Schema.Types.ObjectId, ref: "User", required: true }, 
-    favorites:[{ type: Schema.Types.ObjectId, ref: "User"}]
+    favorites:[{ type: Schema.Types.ObjectId, ref: "User"}], 
+    favoriteScore : {type: Number}
 }, {minimize:false});
 
 // Always populate the author field

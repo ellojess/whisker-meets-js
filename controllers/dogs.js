@@ -31,6 +31,8 @@ module.exports = app => {
         console.log("user is there")
         var dog = new Dog(req.body);
         dog.author = req.user._id;
+        dog.favorites = [];
+        dog.favoriteScore = 0;
 
         dog
             .save()
@@ -102,4 +104,16 @@ app.get('/dogs/:id', (req, res) => {
     });
   })
 
+  //FAVORITE 
+  // dog.favorites = [];
+  // dog.favoriteScore = 0;
+  app.put("/dogs/:id/favorites", function(req, res) {
+    Dog.findById(req.params.id).exec(function(err, dog) {
+      dog.favorites.push(req.user._id);
+      dog.favoriteScore = dog.favoriteScore + 1;
+      dog.save();
+  
+      res.status(200);
+    });
+  });
 }
