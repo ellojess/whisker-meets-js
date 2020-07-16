@@ -28,6 +28,7 @@ app.use(expressValidator());
 // override with POST having ?_method=DELETE or ?_method=PUT
 app.use(methodOverride('_method'))
 
+app.use(express.static('public'));
 
 // Auth Setup
 app.use(express.static(__dirname));
