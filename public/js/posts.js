@@ -1,29 +1,13 @@
 $(document).ready(function() {
-    $(".vote-up").submit(function(e) {
+    $(".favorites").submit(function(e) {
       e.preventDefault();
   
       var postId = $(this).data("id");
       $.ajax({
         type: "PUT",
-        url: "posts/" + postId + "/vote-up",
+        url: "dogs/" + postId + "/favorites",
         success: function(data) {
-          console.log("voted up!");
-        },
-        error: function(err) {
-          console.log(err.messsage);
-        }
-      });
-    });
-  
-    $(".vote-down").submit(function(e) {
-      e.preventDefault();
-  
-      var postId = $(this).data("id");
-      $.ajax({
-        type: "PUT",
-        url: "posts/" + postId + "/vote-down",
-        success: function(data) {
-          console.log("voted down!");
+          console.log("favorites!");
         },
         error: function(err) {
           console.log(err.messsage);
