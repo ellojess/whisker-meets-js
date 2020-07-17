@@ -1,28 +1,23 @@
 <div class="row mt-4">
   <div class="col-lg-6 offset-lg-3">
-    {{!-- <img class="img-fluid w-100 rounded mb-3" src="{{dog.imgUrl}}" alt="Card image cap"> --}}
     <img class="img-fluid w-100 rounded mb-3" src="{{dog.imgUrl}}" alt="Card image cap">
     <p>{{dog.author.username}}</p>
         <form class="favorites" data-id="{{dog._id}}">
           <button class="btn btn-primary btn-sm">Favorite ({{dog.favorites.length}}) </button>
         </form>
-    <small class="text-muted">Joined: {{dog.createdAtFormatted}}</small>
+    {{!-- <small class="text-muted">Joined: {{dog.createdAtFormatted}}</small> --}}
 
 
     <h3>{{dog.name}}</h3>
     <div class="lead">{{dog.desc}}</div>
-    <div class="text-right">
-      <a href="/dogs/{{dog._id}}/edit">Edit</a>
-    </div>
+      <div class="text-right">
+        <a href="/dogs/{{dog._id}}/edit">Edit</a>
+      </div>
 </div>
 
 {{!-- FAVORITE BUTTON --}}
 <div class="col-lg-4 offset-lg-1">
-    <div class="d-flex justify-content-between">
-        {{!-- <b>Favorites ({{dog.favorites.length}})</b> --}}
-        {{!-- <a href="/dogs/{{dog._id}}/favorites/new" class="btn btn-primary btn-sm">Favorites</a> --}}
-    </div>
-
+    <div class="d-flex justify-content-between"></div>
     <div class="list-group mt-4">
       {{#each dog.Favorites}}
         <div class="list-group-item clearfix">
@@ -36,6 +31,7 @@
           </div>
         </div>
       {{/each}}
+
       {{!-- COMMENT --}}
           <form action="/dogs/{{dog._id}}/comments" method="post">
             <textarea class='form-control' name="content" placeholder="Add a comment"></textarea>
