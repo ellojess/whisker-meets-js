@@ -9,14 +9,8 @@ const DogSchema = new Schema({
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
     createdAt: { type: Date },
     author : { type: Schema.Types.ObjectId, ref: "User", required: true }, 
-    favorites:[{ type: Schema.Types.ObjectId, ref: "User"}], 
-    favoriteScore : {type: Number}
+    favorites:[{ type: Schema.Types.ObjectId, ref: "User"}]
 }, {minimize:false});
-
-// Always populate the author field
-//DogSchema
- //   .pre('findOne', Populate('author'))
-  //  .pre('find', Populate('author'))
 
 DogSchema
     .pre('findOne', Populate('author')).pre('find', Populate('author'))

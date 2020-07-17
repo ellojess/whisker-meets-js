@@ -3,6 +3,9 @@
     {{!-- <img class="img-fluid w-100 rounded mb-3" src="{{dog.imgUrl}}" alt="Card image cap"> --}}
     <img class="img-fluid w-100 rounded mb-3" src="{{dog.imgUrl}}" alt="Card image cap">
     <p>{{dog.author.username}}</p>
+        <form class="favorites" data-id="{{dog._id}}">
+          <button class="btn btn-primary btn-sm">Favorite ({{dog.favorites.length}}) </button>
+        </form>
     <small class="text-muted">Joined: {{dog.createdAtFormatted}}</small>
 
 
@@ -16,8 +19,8 @@
 {{!-- FAVORITE BUTTON --}}
 <div class="col-lg-4 offset-lg-1">
     <div class="d-flex justify-content-between">
-        <b>Favorites ({{dog.Favorites.length}})</b>
-        <a href="/dogs/{{dog._id}}/favorites/new" class="btn btn-primary btn-sm">Favorites</a>
+        {{!-- <b>Favorites ({{dog.favorites.length}})</b> --}}
+        {{!-- <a href="/dogs/{{dog._id}}/favorites/new" class="btn btn-primary btn-sm">Favorites</a> --}}
     </div>
 
     <div class="list-group mt-4">

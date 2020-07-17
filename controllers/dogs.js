@@ -12,6 +12,9 @@ module.exports = app => {
         // //Dog.find({ order: [['createdAt', 'DESC']] }).then(dogs => {
       Dog.find({}).lean()
       .then(dogs => {
+        for (let item of dogs) {
+          console.log(item.author)
+        }
         res.render('dogs-index', { dogs, currentUser});
       })
       .catch(err => {
@@ -105,9 +108,7 @@ app.get('/dogs/:id', (req, res) => {
   })
 
   //FAVORITE 
-  // dog.favorites = [];
-  // dog.favoriteScore = 0;
-  app.put("/dogs/:id/favorites", function(req, res) {
+  app.post("/dogs/:id/favorites", function(req, res) {
     Dog.findById(req.params.id).exec(function(err, dog) {
       dog.favorites.push(req.user._id);
       dog.favoriteScore = dog.favoriteScore + 1;
