@@ -1,4 +1,4 @@
-# Whisker Meets Wshisker 
+# Whisker Meets
 
 Whisker Meets Whisker is a web platform that connects dog owners based on location. Users are able to setup playdates and hangouts for their dogs and leave reviews and comments about interactions with various dogs in the neighborhood.
 
