@@ -14,7 +14,14 @@ mongoose.connect(
     // db.close(); turn on for testing
   }
 );
-mongoose.connection.on("error", console.error.bind(console, "MongoDB connection Error:"));
+// mongoose.connection.on("error", console.error.bind(console, "MongoDB connection Error:"));
+
+mongoose.connect('mongodb://localhost/testdb').then(() => {
+console.log("Connected to Database");
+}).catch((err) => {
+    console.log("Not Connected to Database ERROR! ", err);
+});
+
 mongoose.set("debug", true);
 
 module.exports = mongoose.connection;
