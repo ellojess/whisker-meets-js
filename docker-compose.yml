@@ -5,4 +5,4 @@ services:
     container_name: mongo
     restart: always
     ports:
-    - 3000:3000
+    - 27017:27017

@@ -2,9 +2,15 @@
   "name": "whiskers",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "ci:test": "cross-env NODE_ENV=test jest --ci --runInBand --detectOpenHandles --forceExit",
+    "docker:build": "docker build -t ellojess/whiskermeets:latest .",
+    "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD",
+    "docker:push": "docker push ellojess/whiskermeets:latest",
+    "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push"
   },
   "author": "",
   "license": "ISC",

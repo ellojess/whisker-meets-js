@@ -1,3 +1,5 @@
+'use strict';
+
 // Initialize express
 const express = require('express')
 const methodOverride = require('method-override')
@@ -61,9 +63,9 @@ require('./controllers/replies')(app);
 
 
 // Choose a port to listen on
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // Tell the app what port to listen on
 app.listen(port, () => {
-  console.log('App listening on port 3000!')
+  console.log('App listening on port 8080!')
 })
