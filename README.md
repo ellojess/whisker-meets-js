@@ -1,5 +1,6 @@
 # Whisker Meets
 
+
 Whisker Meets Whisker is a web platform that connects dog owners based on location. Users are able to setup playdates and hangouts for their dogs and leave reviews and comments about interactions with various dogs in the neighborhood.
 
 ## Installation
@@ -15,15 +16,19 @@ $ npm install
 $ nodemon server.js
 ```
 
-## Tech Stack 
-- JavaScript
-- Node.js
-- Express
-- MongoDB
-- Mocha
-- Chai
-- HTML 
-- CSS
+## TODO 
+
+|  Category  | Requirement                                                                                          | ✅ |
+|:---------- |------------------------------------------------------------------------------------------------------|:-:|
+| **🐳 Docker** | Repository contains a `Dockerfile` and a `docker-compose.yml` file                                  | ✅ |
+| **🐳 Docker** | `Dockerfile` and `docker-compose.yml` file build without error                                      |   |
+| **⚙️ Deployment** | Project deployed on CapRover using your own domain | |                             |   |
+| **⚙️ Deployment** | Uptime monitored by FreshPing or another health check service |
+|   **⚙️ CI**   | Project includes continuous integration  | |
+|  **📝 Docs**  | `README` includes [badges](https://shields.io) for image size, build status, and website monitoring |   |
+|  **📝 Docs**  | `README` includes instructions on how to build and run your container                               |   |
+
+
 
 ## Features to Look Forward To: 
 - [ ] Cross platform
