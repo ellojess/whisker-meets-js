@@ -1,10 +1,15 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@4.1.0
+
 jobs:
   build:
     docker:
       - image: node:11.10.1
-      - image: circleci/postgres:11-alpine-ram
+      - image: circleci/postgres:11-alpine-ram # CircleCI service image 
+      - image: cimg/base:2020.01 # CircleCI base image 
+      - image: mongo:4.1.6-xenial
 
     working_directory: ~/repo
 

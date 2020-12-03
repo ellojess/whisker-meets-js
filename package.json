@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "ci:test": "cross-env NODE_ENV=test jest --ci --runInBand --detectOpenHandles --forceExit",
-    "docker:build": "docker build -t ellojess/whiskermeets:latest .",
+    "docker:build": "docker build -t ellojess/whiskers:latest .",
     "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD",
-    "docker:push": "docker push ellojess/whiskermeets:latest",
+    "docker:push": "docker push ellojess/whiskers:latest",
     "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push"
   },
   "author": "",
