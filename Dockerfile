@@ -9,6 +9,7 @@ WORKDIR /app
 # where available (npm@5+)
 COPY package*.json ./
 
+# install dependencies 
 RUN npm install 
 
 # bundle app source 
