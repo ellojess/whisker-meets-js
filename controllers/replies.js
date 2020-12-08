@@ -7,8 +7,7 @@ module.exports = app => {
   app.get("/dogs/:dogId/comments/:commentId/replies/new", (req, res) => {
     let dog
     Dog.findById(req.params.dogId)
-      .then(doggo => {
-        dog = doggo
+      .then(dog => {
         return Comment.findById(req.params.commentId);
       })
       .then(comment => {
