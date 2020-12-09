@@ -15,8 +15,7 @@ module.exports = (app) => {
         user
         .save()
         .then(user => {
-            // var token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "60 days" });
-            var token = jwt.sign({ _id: user._id }, { expiresIn: "60 days" });
+            var token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "60 days" });
             res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
             res.redirect("/");
         })
@@ -59,8 +58,7 @@ module.exports = (app) => {
             }
             console.log(`Creating json web token with secret: ${process.env}`)
             // Create a token
-            // const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
-                const token = jwt.sign({ _id: user._id, username: user.username } {
+            const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
                 expiresIn: "60 days"
             });
             // Set a cookie and redirect to root
