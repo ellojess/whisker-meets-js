@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 assert = require("assert");
 let url;
 
-if (process.env.IS_PRODUCTION){
-  url = "mongodb://srv-captain--whiskers-mongo/mydatabase?authSource=admin"
+if (process.env.MONGODB_URL){
+  url = process.env.MONGODB_URL
 } else {
   url = "mongodb://host.docker.internal:27017/whiskers-db?retryWrites=true&w=majority";
 }
