@@ -1,9 +1,14 @@
 /* Mongoose Connection */
 const mongoose = require("mongoose");
 assert = require("assert");
+let url;
 
-let url = "mongodb://host.docker.internal:27017/whiskers-db";
-url += "?retryWrites=true&w=majority"
+if (process.env.IS_PRODUCTION){
+  url = "mongodb://srv-captain--whiskers-mongo/mydatabase?authSource=admin"
+} else {
+  url = "mongodb://host.docker.internal:27017/whiskers-db?retryWrites=true&w=majority";
+}
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
