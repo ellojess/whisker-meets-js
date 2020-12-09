@@ -1,8 +1,4 @@
 # Whisker Meets
-![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/ellojess/whisker-meets-js)
-![Travis (.org)](https://img.shields.io/travis/Evansdava/HMG-Wargame)
-![Website](https://img.shields.io/website?url=http%3A%2F%2Fhmg-wargame.dev.evansdava.xyz%2F)
-
 
 Whisker Meets Whisker is a web platform that connects dog owners based on location. Users are able to setup playdates and hangouts for their dogs and leave reviews and comments about interactions with various dogs in the neighborhood.
 
