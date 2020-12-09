@@ -13,7 +13,8 @@ if (process.env.MONGODB_URL){
 mongoose.Promise = global.Promise;
 mongoose.connect(
   url,
-  { useNewUrlParser: true,
+  { useMongoClient: true,
+    useNewUrlParser: true,
     authSource: "admin",
     useUnifiedTopology: true,
     useNewUrlParser: true,
