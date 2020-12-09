@@ -1,25 +1,25 @@
-# define image to build from Docker 
-# use the latest LTS (long term support) version 12 of node available from the Docker Hub 
+# Define image to build from Docker. Optimized for Node.
+# use the latest LTS (long term support) version 12 of node available from the Docker Hub
 FROM node:12 
 
-# create app directory 
-WORKDIR /app 
+# Set working directory to /app so we can execute commands in it
+WORKDIR /app
 
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
+# A wildcard* is used to ensure both package.json AND 
+#package-lock.json are copied where available (npm@5+)
 COPY package*.json ./
 
-# install dependencies 
+# Install dependencies 
 RUN npm install 
 
-# bundle app source 
+# Bundle app source 
 COPY . . 
 
-# declare port 
+# Declare port 
 ENV PORT=8080
 
-# expose port mapped by the docker daemon
+# Expose port mapped by the docker daemon
 EXPOSE 8080 
 
-# run file
+# Run file
 CMD [ "npm", "start" ]  

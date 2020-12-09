@@ -4,7 +4,6 @@ assert = require("assert");
 
 let url = "mongodb://host.docker.internal:27017/whiskers-db";
 url += "?retryWrites=true&w=majority"
-console.log("//////////////////", url)
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
