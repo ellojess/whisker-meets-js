@@ -11,7 +11,7 @@ jobs:
       - image: cimg/base:2020.01 # CircleCI base image 
       - image: mongo:4.1.6-xenial
 
-    working_directory: ~/repo
+    working_directory: ~/whisker-meets-js
 
     steps:
       - checkout

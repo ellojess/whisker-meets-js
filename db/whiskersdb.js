@@ -20,6 +20,7 @@ mongoose.connect(
     useNewUrlParser: true,
     useCreateIndex: true,},
   function(err, db) {
+    console.log(err)
     assert.equal(null, err);
     console.log("Connected successfully to database");
 
