@@ -1,6 +1,6 @@
 # Whisker Meets
 
-![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/ellojess/whisker-meets-js)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/ellojess/whisker-meets-js_app)
 ![CircleCI](https://img.shields.io/circleci/build/github/ellojess/whisker-meets-js/master)
 ![Website](https://img.shields.io/website?url=http%3A%2F%2Fwhiskers.dev.ellojess.codes%2F)
 
