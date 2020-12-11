@@ -16,9 +16,7 @@ mongoose.connect(
   { useMongoClient: true,
     useNewUrlParser: true,
     authSource: "admin",
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,},
+  },
   function(err, db) {
     console.log(err)
     assert.equal(null, err);
