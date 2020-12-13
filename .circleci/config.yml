@@ -13,10 +13,7 @@ jobs:
     docker:
       # Primary container where the job's commands are run
       - image: circleci/node:8.15.0
-      - image: cimg/base:2020.01 # CircleCI base image 
-      - image: circleci/postgres:11-alpine-ram # CircleCI service image 
-      # Any additional containers are started in the same network and are able to communicate with the primary container
-      - image: mongo:4.1.6-xenial
+      - image: circleci/mongo:latest
     # Steps allow you to define a set of executable commands
     steps:
       # Reserved word in Circle CI for checking out your code repository
