@@ -1,47 +1,60 @@
-version: 2.1
+# The version of circle ci platform to use
+version: 2.1 
 
-orbs:
-  node: circleci/node@4.1.0
-
+# Collection of jobs to execute
 jobs:
+  # Name of the build job. Feel free to choose a descriptive name
   build:
+    # Define some environment variables. Note: API tokens, server keys, etc should not be defined here
+    environment:
+      NODE_ENV: 'test'
+
+    # Specify the execution environment. Circle CI allows you to run jobs in one of 3 environments - docker, a linux virtual machine or a macOS virtual machine
     docker:
-      - image: node:11.10.1
-      - image: circleci/postgres:11-alpine-ram # CircleCI service image 
+      # Primary container where the job's commands are run
+      - image: circleci/node:8.15.0
       - image: cimg/base:2020.01 # CircleCI base image 
+      - image: circleci/postgres:11-alpine-ram # CircleCI service image 
+      # Any additional containers are started in the same network and are able to communicate with the primary container
       - image: mongo:4.1.6-xenial
-
-    working_directory: ~/whisker-meets-js
-
+    # Steps allow you to define a set of executable commands
     steps:
+      # Reserved word in Circle CI for checking out your code repository
       - checkout
 
-      # Download and cache dependencies
+      # If a cache entry with this key exists, add it to the working directory
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: yarn install
-
-      - save_cache:
-          paths:
-            - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: yarn ci:test
+      # Execute a command. The simple for is `run: npm install --verbose`
+      - run: 
+          # Name attribute provides useful organization information when returning errors, warnings or output
+          name: Install project dependencies
+          # The command to execute.
+          command: npm install --verbose
 
-      - setup_remote_docker:
-          docker_layer_caching: true
+      # Persist some data to cache which can be used in subsequent builds. 
+      # For guidebook, node_modules is cached. This makes subsequent build runs faster if package.json is unchanged
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json"}}
+          paths:
+            - node_modules
+
+      - run: npm run lint
 
       - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="18.06.3-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
-      - run: yarn ci:docker
+          name: Run tests
+          # When running Jest tests, please use the --runInBand flag: https://circleci.com/docs/2.0/collect-test-data/#jest
+          command: npm test -- --runInBand
+
+# Workflows allow you to define the order of execution of jobs. 
+# For a single job, like in this example, the workflows section can be omitted
+# Learn [more about workflows](https://circleci.com/docs/2.0/concepts/#section=getting-started){:target="_blank"}
+workflows:
+  # The workflow version
+  version: 2.1
+  # A unique name for the workflow
+  run_build:
+    # The jobs to run in this workflow
+    jobs:
+      - build
