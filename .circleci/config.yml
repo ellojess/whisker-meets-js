@@ -1,6 +1,10 @@
 # The version of circle ci platform to use
 version: 2.1 
 
+orbs:
+  node: circleci/node@3.0.0
+  
+
 # Collection of jobs to execute
 jobs:
   # Name of the build job. Feel free to choose a descriptive name
@@ -13,7 +17,7 @@ jobs:
     docker:
       # Primary container where the job's commands are run
       - image: circleci/node:8.15.0
-      - image: circleci/mongo:latest
+
     # Steps allow you to define a set of executable commands
     steps:
       # Reserved word in Circle CI for checking out your code repository
@@ -36,8 +40,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json"}}
           paths:
             - node_modules
-
-      - run: npm run lint
 
       - run:
           name: Run tests
