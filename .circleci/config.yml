@@ -17,22 +17,23 @@ jobs:
     docker:
       # Primary container where the job's commands are run
       - image: circleci/node:8.15.0
+       - image: cimg/ruby:2.7.1-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     # Steps allow you to define a set of executable commands
     steps:
       # Reserved word in Circle CI for checking out your code repository
       - checkout
-      - run: npm install
-      - run: mkdir ~/junit
       - run:
-          command: mocha test --reporter mocha-junit-reporter
-          environment:
-            MOCHA_FILE: ~/junit/test-results.xml
-          when: always
-      - store_test_results:
-          path: ~/junit
-      - store_artifacts:
-          path: ~/junit     
+          name: "Update Node.js and npm"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
+      - run:
+          name: Check current version of node
+          command: node -v
 
       # If a cache entry with this key exists, add it to the working directory
       - restore_cache:
