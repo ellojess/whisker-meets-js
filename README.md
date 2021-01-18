@@ -1,21 +1,28 @@
-# Whisker Meets
+# Whisker Meets ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/ellojess/whisker-meets-js_app) ![Website](https://img.shields.io/website?url=http%3A%2F%2Fwhiskers.dev.ellojess.codes%2F) ![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fellojess%2Fwhisker-meets-js)
 
-![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/ellojess/whisker-meets-js_app)
-![CircleCI](https://img.shields.io/circleci/build/github/ellojess/whisker-meets-js/master)
-![Website](https://img.shields.io/website?url=http%3A%2F%2Fwhiskers.dev.ellojess.codes%2F)
 
+<img src="preview_imgs/preview-whiskers.png" alt="drawing" width="450"/>
+
+## Introduction 
 Whisker Meets Whisker is a web platform that connects dog owners based on location. Users are able to setup playdates and hangouts for their dogs and leave reviews and comments about interactions with various dogs in the neighborhood.
 
-## Installation
+## The Code
+**Note:** If you have any issues or contributions you would like to bring up, feel free to submit it **[here](https://github.com/ellojess/whisker-meets-js/issues/new)**
+
+If you'd like to build and run the container and view the code locally on your desktop, follow these steps: 
 
 1. Download or clone this repo 
-2. Run the following commands in terminal
+  ```bash
+  $ git clone git@github.com:ellojess/whisker-meets-js.git
+  ```
+  
+2. `cd` into the project folder and open it in your chosen text editor (or use `code .` to open it in Visual Studio Code
 
-```bash
-$ cd whisker-meets-js
+  ```bash
+  $ cd whisker-meets-js
 
-$ docker-compose up
-```
+  $ docker-compose up
+  ```
 
 ## TODO 
 
