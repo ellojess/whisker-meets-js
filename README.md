@@ -13,7 +13,6 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -32,6 +31,13 @@
 <img src="preview_imgs/preview-whiskers.png" alt="drawing" width="450"/>
 
 Whisker Meets Whisker is a web platform that connects dog owners based on location. Users are able to setup playdates and hangouts for their dogs and leave reviews and comments about interactions with various dogs in the neighborhood.
+
+### Built With
+* [JavaScript](https://www.javascript.com/)
+* [NodeJS](https://nodejs.org/en/)
+* [MongoDB](https://www.mongodb.com/3)
+* [Express](https://expressjs.com/)
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
