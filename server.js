@@ -1,5 +1,7 @@
 'use strict';
 
+const serverless = require('serverless-http');
+
 // Initialize express
 const express = require('express')
 const methodOverride = require('method-override')
@@ -69,3 +71,5 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log('App listening on port 8080!')
 })
+
+module.exports.handler = serverless(app);
